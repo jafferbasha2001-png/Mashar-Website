@@ -653,7 +653,24 @@ stores: {
             "0559101533"
 
     },
+alaarid: {
 
+    name:
+        "Al-Aarid",
+
+    status:
+        "OPENING SOON",
+
+    location:
+        "Al-Aarid, Saudi Arabia",
+
+    message:
+        "A new destination for timeless elegance is coming closer to you.",
+
+    button:
+        "COMING SOON"
+
+},
     
 },
 
@@ -1404,7 +1421,7 @@ stores: {
 
     },
 
-    store1: {
+    store8: {
 
         name:
             "الخبر",
@@ -1424,7 +1441,24 @@ stores: {
         contactNumber:
             "0559101533"
 },
+alaarid: {
 
+    name:
+        "العارض",
+
+    status:
+        "قريباً الافتتاح",
+
+    location:
+        "العارض، المملكة العربية السعودية",
+
+    message:
+        "وجهة جديدة للأناقة الأصيلة أصبحت أقرب إليكم.",
+
+    button:
+        "قريباً"
+
+},
     
 },
     // continue store2, store3 etc.
