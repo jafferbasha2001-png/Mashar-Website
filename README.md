@@ -49,6 +49,24 @@ Open `http://localhost:3001`. Express serves `client/dist` and falls back to its
 
 The API uses parameterized queries and explicit columns. Database errors are logged server-side without credentials or internal details in browser responses.
 
+### Complete customer endpoints (local server)
+
+Start the API from the project root with `npm.cmd start --prefix server`.
+
+| Request | URL |
+| --- | --- |
+| List customers (first 10 by default) | `http://localhost:3001/api/customers` |
+| List customers with pagination | `http://localhost:3001/api/customers?page=1&limit=10` |
+| Fetch customer with ID 1 | `http://localhost:3001/api/customers/1` |
+
+All requests use `GET`. Replace `1` in the final URL with the customer ID.
+Customer fields are `customer_id`, `first_name`, `last_name`, `email`, `phone`, `city`, `country`, and `created_at`.
+The list response is `{ "data": [...], "pagination": { "page": 1, "limit": 10, "total": 25, "totalPages": 3 } }` (example totals).
+A single-customer response is `{ "data": { ... } }`.
+Invalid IDs or pagination return HTTP 400, missing customers return 404, and database failures return 500.
+
+Run the read-only API integration tests against the configured local database with `npm.cmd test --prefix server`.
+
 ## Troubleshooting
 
 - **Connection refused:** confirm MySQL is running and `DB_HOST`/`DB_PORT` match it. Confirm Express uses port 3001.
@@ -58,3 +76,11 @@ The API uses parameterized queries and explicit columns. Database errors are log
 - **npm is not recognized:** install Node.js, reopen PowerShell, and verify `node --version` and `npm --version`.
 
 The API is intentionally unauthenticated for local development and binds to `localhost` by default. Add authentication, authorization, HTTPS, and production network controls before public deployment.
+
+### Customer pages
+
+The Customers menu opens `/customers`. Submit the search form to filter by customer ID, full name, email, phone, city, or country. Search applies to the entire directory before pagination, with 10 results per page. Clear restores the unfiltered directory.
+
+Select a customer name to open `/customers/:id`, which retrieves the record from `GET /api/customers/:id`. The back link preserves the directory search and page. Both pages support loading, errors, retry, and empty or missing results.
+
+The list API accepts an optional `search` parameter, for example `http://localhost:3001/api/customers?search=riyadh&page=1&limit=10`. Searches are case-insensitive literal substrings, limited to 200 characters.
